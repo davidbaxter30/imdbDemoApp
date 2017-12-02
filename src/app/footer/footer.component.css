@@ -1,0 +1,12 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4d4d4d;
+    color: #b4b4b4;
+}
+
+:host span {
+    font-size: 15px;
+    line-height: 15px;
+}

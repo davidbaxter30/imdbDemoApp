@@ -1,3 +1,15 @@
-<p>
-  menu works!
-</p>
+<a [routerLink]="['/search']" [class]="isActive('search')">
+  <i class="fa fa-search"></i>
+</a>
+
+<a [routerLink]="['/saved']" [class]="isActive('saved')">
+  <i class="fa fa-floppy-o"></i>
+</a>
+
+<a [routerLink]="['/about']" [class]="isActive('about')">
+    <i class="fa fa-info"></i>
+</a>
+
+<a [routerLink]="['/tools']" [class]="isActive('tools')">
+    <i class="fa fa-briefcase"></i>
+</a>

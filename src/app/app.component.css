@@ -1,0 +1,22 @@
+:host .menu {
+    grid-area: menu;
+}
+
+:host .router {
+    grid-area: content;
+}
+
+:host .footer {
+    grid-area: footer;
+}
+
+:host .container {
+    display: grid;
+    width: 100vw; 
+    height: 100vh;
+    grid-template-columns: 100px auto;
+    grid-template-rows: auto 40px;
+    grid-template-areas: 
+        "menu content"
+        "menu footer";
+}

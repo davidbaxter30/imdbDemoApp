@@ -7,6 +7,7 @@ This Imdb Demo app is a showcase of some of my knowledge of Angular 4, Javascrip
 * [Angular](https://angular.io/)
 * [Material UI](https://www.npmjs.com/package/material-ui)
 * [Angular Cli](https://github.com/angular/angular-cli)
+* [IMDB API](https://www.npmjs.com/package/imdb-api)
 
 ## Development server
 
