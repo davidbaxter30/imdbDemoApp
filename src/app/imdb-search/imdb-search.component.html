@@ -1,15 +1,23 @@
-<input class="search-input" #searchField> 
 
-<mat-card class="movie-result" *ngFor="let movie of movies">
-  <mat-card-header>
-    <mat-card-title>{{movie.Title}}</mat-card-title>
-    <mat-card-subtitle>{{movie.Year}}</mat-card-subtitle>
-  </mat-card-header>
+<mat-form-field class="search-input">
+  <input matInput placeholder="Search Movie Database" value="x-men" #searchField (keydown.enter)="search(searchField.value)"> 
+</mat-form-field>
 
-  <img mat-card-image [src]="movie.Poster" [alt]="movie.Title">
-  <mat-card-actions>
-    <button mat-button>SAVE</button> <!-- TODO: change to the save movie component later -->
-    <button mat-button>VIEW ON IMDB</button>
-  </mat-card-actions>
-</mat-card>
+<div class="movie-results"  *ngIf="!showDetails">
+  <router-outlet name="movieDetails"></router-outlet>
+  
+  <mat-card class="movie-result" *ngFor="let movie of movies">
+    <mat-card-header>
+      <mat-card-title>{{movie.Title}}</mat-card-title>
+      <mat-card-subtitle>{{movie.Year}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <img mat-card-image [src]="getPoster(movie.Poster)" [alt]="movie.Title">
+    <mat-card-actions>
+      <button mat-raised-button color="primary">SAVE</button> <!-- TODO: change to the save movie component later -->
+      <button mat-raised-button [routerLink]="[{outlets: { 'movieDetails': ['details', movie.imdbID]}}]">DETAILED VIEW</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
   

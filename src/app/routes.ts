@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { ImdbSearchComponent } from './imdb-search/imdb-search.component';
 import { SavedMovieListComponent } from './saved-movie-list/saved-movie-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
 
 export const appRoutes: Routes = [
     {
@@ -12,11 +13,14 @@ export const appRoutes: Routes = [
     },
     { 
         path: 'search',
-        component: ImdbSearchComponent
-    },
-    {
-        path: 'search/:name',
-        component: ImdbSearchComponent
+        component: ImdbSearchComponent,
+        children: [
+            {
+                path: 'details/:id',
+                component: MovieDetailsComponent,
+                outlet: 'movieDetails'
+            }
+        ]
     },
     {
         path: 'saved', 

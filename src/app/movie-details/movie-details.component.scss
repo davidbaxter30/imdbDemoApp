@@ -1,0 +1,35 @@
+:host {
+    .movie-details {
+        .movie-detail ::ng-deep {
+            display: grid;
+            grid-template-columns: 300px auto;
+            grid-template-rows: 450px auto 36px;
+            grid-template-areas: 
+                "image info"
+                "plot plot"
+                "buttons buttons";
+            margin: 10px;
+            mat-card-subtitle {
+                margin: 20px 10px;
+            }
+
+            mat-card-header {
+                grid-area: info;
+            }
+            img {
+                grid-area: image;
+                max-width: 300px;
+                max-height: 450px;
+            }
+            mat-card-content {
+                grid-area: plot;
+                p {
+                    margin-top: 20px;
+                }
+            }
+            mat-card-actions {
+                grid-area: buttons;
+            }
+        }
+    }
+}

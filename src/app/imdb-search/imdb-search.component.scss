@@ -1,0 +1,33 @@
+@import '~@angular/material/theming';
+
+:host {
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 80px auto;
+    grid-template-areas: 
+        "search"
+        "results";
+    background-color: #4d4d4d;
+
+    .movie-results {
+        grid-area: results;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        .movie-result {
+            margin: 10px;
+            align-self: flex-start; 
+        }
+    }
+    
+    .search-input {
+        grid-area: search;
+        width: 100%;
+        height: 30px;
+        font-size: 25px;
+        line-height: 30px;
+        padding: 5px 40px;
+        color: map-get($mat-grey, 400);
+    }
+}

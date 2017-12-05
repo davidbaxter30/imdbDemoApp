@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~font-awesome/css/font-awesome.css';
+
+@import '~@angular/material/theming';
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$imdb-demo-primary: mat-palette($mat-grey, 400, 100, 600);
+$imdb-demo-accent:  mat-palette($mat-blue-grey, 400, 100, 600);
+
+// The warn palette is optional (defaults to red).
+$imdb-demo-warn:    mat-palette($mat-red, 200, 100, 300);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$imdb-demo-theme: mat-dark-theme($imdb-demo-primary, $imdb-demo-accent, $imdb-demo-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($imdb-demo-theme);
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}

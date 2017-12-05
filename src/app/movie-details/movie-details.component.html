@@ -1,0 +1,29 @@
+<div class="movie-details">
+    <mat-card class="movie-detail" *ngIf="detailedMovie">
+      <mat-card-header>
+        <mat-card-title>{{detailedMovie.Title}}</mat-card-title>
+        <mat-card-subtitle>{{detailedMovie.Year}}</mat-card-subtitle>
+        <mat-card-subtitle>{{detailedMovie.Rated}}</mat-card-subtitle>
+        <mat-card-subtitle>{{detailedMovie.Runtime}}</mat-card-subtitle>
+        <mat-card-subtitle>Director: {{detailedMovie.Director}}</mat-card-subtitle>
+        <mat-card-subtitle>Writers: {{detailedMovie.Writer}}</mat-card-subtitle>
+        <mat-card-subtitle>Actors: {{detailedMovie.Actors}}</mat-card-subtitle>
+        <mat-card-subtitle>{{detailedMovie.Awards}}</mat-card-subtitle>
+        <mat-card-subtitle><span *ngFor="let rating of detailedMovie.Ratings">{{rating.Source}}: {{rating.Value}}</span></mat-card-subtitle>
+        <mat-card-subtitle>{{detailedMovie.Genre}}</mat-card-subtitle>
+        <mat-card-subtitle>{{detailedMovie.BoxOffice}}</mat-card-subtitle>
+      </mat-card-header>
+  
+      <img mat-card-image [src]="getPoster(detailedMovie.Poster)" [alt]="detailedMovie.Title">
+  
+      <mat-card-content>
+        <p>{{detailedMovie.Plot}}</p>
+      </mat-card-content>
+  
+      <mat-card-actions>
+        <button mat-raised-button color="primary">SAVE</button> <!-- TODO: change to the save movie component later -->
+        <button mat-raised-button (click)="openTab(detailedMovie.Website)" *ngIf="detailedMovie.Website !== 'N/A'">WEBSITE</button>
+        <button mat-raised-button  [routerLink]="['/search']">CLOSE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>

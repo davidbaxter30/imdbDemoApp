@@ -16,6 +16,7 @@ import { MatInputModule, MatCardModule, MatButtonModule } from '@angular/materia
 
 import { FirebaseService } from './services/firebase.service';
 import { ImdbService } from './services/imdb.service';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ImdbService } from './services/imdb.service';
     FooterComponent,
     ImdbSearchComponent,
     SavedMovieListComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    MovieDetailsComponent
   ],
   imports: [
     BrowserModule,
