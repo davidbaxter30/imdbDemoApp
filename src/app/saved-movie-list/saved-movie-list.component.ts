@@ -18,7 +18,7 @@ export class SavedMovieListComponent implements OnInit {
   ngOnInit() {
     // this.movies = this.firebaseService.getSavedMovies();
     if (this.imdbService.detailsOpened) {
-      this.imdbService.closeDetails();
+      this.imdbService.detailsOpened = false;
     }
 
     this.movies = this.firebaseService.getSavedMovies();
