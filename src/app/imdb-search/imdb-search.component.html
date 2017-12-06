@@ -3,16 +3,20 @@
   <input matInput placeholder="Search Movie Database" value="x-men" #searchField (keydown.enter)="search(searchField.value)"> 
 </mat-form-field>
 
-<div class="movie-results"  *ngIf="!showDetails">
-  <router-outlet name="movieDetails"></router-outlet>
-  
+<div class="movie-results">
+    <router-outlet name="movieDetails"></router-outlet>
+</div>
+
+<!-- Bug: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked. (https://github.com/angular/angular/issues/17572) -->
+<!-- Problem is on angulars side -->
+<div class="movie-results" *ngIf="!showDetails()"> 
   <mat-card class="movie-result" *ngFor="let movie of movies">
     <mat-card-header>
       <mat-card-title>{{movie.Title}}</mat-card-title>
       <mat-card-subtitle>{{movie.Year}}</mat-card-subtitle>
     </mat-card-header>
 
-    <img mat-card-image [src]="getPoster(movie.Poster)" [alt]="movie.Title">
+    <img mat-card-image [src]="movie.Poster" [alt]="movie.Title">
     <mat-card-actions>
       <button mat-raised-button color="primary">SAVE</button> <!-- TODO: change to the save movie component later -->
       <button mat-raised-button [routerLink]="[{outlets: { 'movieDetails': ['details', movie.imdbID]}}]">DETAILED VIEW</button>

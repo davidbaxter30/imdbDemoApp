@@ -25,20 +25,6 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     this.detailSubscription$.unsubscribe();
   }
 
-  getPoster(posterUrl: string): string {
-    return posterUrl !== 'N/A' ? posterUrl : this.getRandomFillerImage();
-  }
-
-  private getRandomFillerImage(): string {
-    const fillerSites = [
-      'https://www.placecage.com/300/400',
-      'https://www.fillmurray.com/300/400',
-      'http://www.stevensegallery.com/300/400'
-    ];
-
-    return fillerSites[Math.floor(Math.random() * 3)];
-  }
-
   openTab(url): void {
     window.open(url, '_blank');
   }
@@ -48,5 +34,9 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
       .subscribe(detailedMovie => {
         this.detailedMovie = detailedMovie;
       });
+  }
+
+  closeDetails() {
+    this.imdbService.closeDetails();
   }
 }

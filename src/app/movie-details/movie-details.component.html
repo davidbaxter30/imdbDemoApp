@@ -14,7 +14,7 @@
         <mat-card-subtitle>{{detailedMovie.BoxOffice}}</mat-card-subtitle>
       </mat-card-header>
   
-      <img mat-card-image [src]="getPoster(detailedMovie.Poster)" [alt]="detailedMovie.Title">
+      <img mat-card-image [src]="detailedMovie.Poster" [alt]="detailedMovie.Title">
   
       <mat-card-content>
         <p>{{detailedMovie.Plot}}</p>
@@ -23,7 +23,7 @@
       <mat-card-actions>
         <button mat-raised-button color="primary">SAVE</button> <!-- TODO: change to the save movie component later -->
         <button mat-raised-button (click)="openTab(detailedMovie.Website)" *ngIf="detailedMovie.Website !== 'N/A'">WEBSITE</button>
-        <button mat-raised-button  [routerLink]="['/search']">CLOSE</button>
+        <button mat-raised-button (click)="closeDetails()">CLOSE</button>
       </mat-card-actions>
     </mat-card>
   </div>
