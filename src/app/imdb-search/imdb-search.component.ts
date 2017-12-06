@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/Rx'
 
 import { ImdbService } from '../services/imdb.service';
+import { FirebaseService } from '../services/firebase.service';
 import { SimpleMovie, ImdbResponse, DetailedMovie } from '../models/imdb';
 
 @Component({
@@ -16,7 +16,7 @@ export class ImdbSearchComponent implements OnInit, OnDestroy {
   movies: SimpleMovie[];
   simpleSubscription$: Subscription;
 
-  constructor(private imdbService: ImdbService, private route: ActivatedRoute) { }
+  constructor(private imdbService: ImdbService, private firebaseService: FirebaseService ,private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params
@@ -31,6 +31,9 @@ export class ImdbSearchComponent implements OnInit, OnDestroy {
   }
 
   search(movieName): void {
+    if (this.imdbService.detailsOpened) {
+      this.imdbService.closeDetails();
+    }
     this.simpleSubscription$.unsubscribe();
 
     this.simpleSubscription$ = this.imdbService.searchMovies(movieName).subscribe((response: ImdbResponse) => {
@@ -39,11 +42,14 @@ export class ImdbSearchComponent implements OnInit, OnDestroy {
   }
 
   showDetails(): boolean {
-    console.log('showDetails: ', this.imdbService.detailsOpened)
     return this.imdbService.detailsOpened;
   }
 
   openTab(url): void {
     window.open(url, '_blank');
   }
+
+  saveMovie(movie: SimpleMovie): void {
+    this.firebaseService.saveMovie(movie);
+  } 
 }

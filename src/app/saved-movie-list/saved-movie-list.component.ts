@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
+import { FirebaseService } from '../services/firebase.service';
+import { ImdbService } from '../services/imdb.service';
 
 @Component({
   selector: 'app-saved-movie-list',
@@ -7,9 +11,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SavedMovieListComponent implements OnInit {
 
-  constructor() { }
+  movies: Observable<any[]>
+
+  constructor(private firebaseService: FirebaseService, private imdbService: ImdbService) { }
 
   ngOnInit() {
+    // this.movies = this.firebaseService.getSavedMovies();
+    if (this.imdbService.detailsOpened) {
+      this.imdbService.closeDetails();
+    }
+
+    this.movies = this.firebaseService.getSavedMovies();
   }
 
+  showDetails(): boolean {
+    return this.imdbService.detailsOpened;
+  }
+
+  deleteMovie(movie): void {
+    this.firebaseService.removeMovie(movie);
+  }
 }

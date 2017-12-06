@@ -18,7 +18,13 @@
         .movie-result {
             margin: 10px;
             align-self: flex-start; 
+            max-width: 300px;
         }
+    }
+
+    .movie-details {
+        grid-area: results;
+        padding: 10px 0 20px;
     }
     
     .search-input {

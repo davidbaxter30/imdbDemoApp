@@ -9,7 +9,7 @@
         <mat-card-subtitle>Writers: {{detailedMovie.Writer}}</mat-card-subtitle>
         <mat-card-subtitle>Actors: {{detailedMovie.Actors}}</mat-card-subtitle>
         <mat-card-subtitle>{{detailedMovie.Awards}}</mat-card-subtitle>
-        <mat-card-subtitle><span *ngFor="let rating of detailedMovie.Ratings">{{rating.Source}}: {{rating.Value}}</span></mat-card-subtitle>
+        <mat-card-subtitle><span *ngFor="let rating of detailedMovie.Ratings"> {{rating.Source}}: {{rating.Value}}<br></span></mat-card-subtitle>
         <mat-card-subtitle>{{detailedMovie.Genre}}</mat-card-subtitle>
         <mat-card-subtitle>{{detailedMovie.BoxOffice}}</mat-card-subtitle>
       </mat-card-header>

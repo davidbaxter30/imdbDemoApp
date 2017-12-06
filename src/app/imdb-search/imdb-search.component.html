@@ -3,7 +3,7 @@
   <input matInput placeholder="Search Movie Database" value="x-men" #searchField (keydown.enter)="search(searchField.value)"> 
 </mat-form-field>
 
-<div class="movie-results">
+<div class="movie-details">
     <router-outlet name="movieDetails"></router-outlet>
 </div>
 
@@ -18,7 +18,7 @@
 
     <img mat-card-image [src]="movie.Poster" [alt]="movie.Title">
     <mat-card-actions>
-      <button mat-raised-button color="primary">SAVE</button> <!-- TODO: change to the save movie component later -->
+      <button mat-raised-button color="primary" (click)="saveMovie(movie)">SAVE</button> <!-- TODO: change to the save movie component later -->
       <button mat-raised-button [routerLink]="[{outlets: { 'movieDetails': ['details', movie.imdbID]}}]">DETAILED VIEW</button>
     </mat-card-actions>
   </mat-card>

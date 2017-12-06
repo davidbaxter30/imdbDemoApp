@@ -16,7 +16,6 @@ export class MenuComponent implements OnInit {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.currentPath = event.url.split('/')[1];
-        console.log('currentPath: ', this.currentPath)
       }
     })
   }

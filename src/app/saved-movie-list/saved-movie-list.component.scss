@@ -1,0 +1,28 @@
+@import '~@angular/material/theming';
+
+:host {
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "results";
+    background-color: #4d4d4d;
+
+    .saved-movies {
+        grid-area: results;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        .saved-movie {
+            margin: 10px;
+            align-self: flex-start; 
+            max-width: 300px;
+        }
+    }
+
+    .movie-details {
+        grid-area: results;
+        padding: 10px 20px;
+    }
+}
