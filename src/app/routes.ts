@@ -11,6 +11,17 @@ export const appRoutes: Routes = [
         redirectTo: 'search',
         pathMatch: 'full'
     },
+    {
+        path: 'saved', 
+        component: SavedMovieListComponent,
+        children: [
+            {
+                path: 'details/:id',
+                component: MovieDetailsComponent,
+                outlet: 'savedMovieDetails'
+            }
+        ]
+    },
     { 
         path: 'search',
         component: ImdbSearchComponent,
@@ -21,10 +32,6 @@ export const appRoutes: Routes = [
                 outlet: 'movieDetails'
             }
         ]
-    },
-    {
-        path: 'saved', 
-        component: SavedMovieListComponent
     },
     {
         path: '**',

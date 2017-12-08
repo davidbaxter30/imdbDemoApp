@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -10,7 +10,7 @@ export class MenuComponent implements OnInit {
 
   currentPath: string;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.router.events.subscribe((event) => {

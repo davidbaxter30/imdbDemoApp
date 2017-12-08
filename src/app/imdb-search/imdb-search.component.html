@@ -18,7 +18,8 @@
 
     <img mat-card-image [src]="movie.Poster" [alt]="movie.Title">
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="saveMovie(movie)">SAVE</button> <!-- TODO: change to the save movie component later -->
+      <button mat-raised-button color="warn" (click)="removeMovie(movie)" *ngIf="isSaved(movie.imdbID)">REMOVE</button>
+      <button mat-raised-button color="primary" (click)="saveMovie(movie)" *ngIf="!isSaved(movie.imdbID)">SAVE</button>
       <button mat-raised-button [routerLink]="[{outlets: { 'movieDetails': ['details', movie.imdbID]}}]">DETAILED VIEW</button>
     </mat-card-actions>
   </mat-card>

@@ -14,29 +14,31 @@ import { SimpleMovie, ImdbResponse, DetailedMovie } from '../models/imdb';
 export class ImdbSearchComponent implements OnInit, OnDestroy {
 
   movies: SimpleMovie[];
-  simpleSubscription$: Subscription;
+  simpleMovies$: Subscription;
+  savedMovies$: Subscription;
 
-  constructor(private imdbService: ImdbService, private firebaseService: FirebaseService ,private route: ActivatedRoute) { }
+  constructor(private imdbService: ImdbService, private firebaseService: FirebaseService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.params
-    this.simpleSubscription$ = this.imdbService.searchMovies('x-men')
+    this.simpleMovies$ = this.imdbService.searchMovies('x-men')
       .subscribe((response: ImdbResponse) => {
         this.movies = response.Search;
       });
+    this.savedMovies$ = this.firebaseService.getSavedMovies().subscribe();
   }
 
   ngOnDestroy() {
-    this.simpleSubscription$.unsubscribe();
+    this.simpleMovies$.unsubscribe();
+    this.savedMovies$.unsubscribe();
   }
 
   search(movieName): void {
     if (this.imdbService.detailsOpened) {
-      this.imdbService.closeDetails();
+      this.imdbService.closeDetails(this.route);
     }
-    this.simpleSubscription$.unsubscribe();
+    this.simpleMovies$.unsubscribe();
 
-    this.simpleSubscription$ = this.imdbService.searchMovies(movieName).subscribe((response: ImdbResponse) => {
+    this.simpleMovies$ = this.imdbService.searchMovies(movieName).subscribe((response: ImdbResponse) => {
       this.movies = response.Search;
     });
   }
@@ -51,5 +53,13 @@ export class ImdbSearchComponent implements OnInit, OnDestroy {
 
   saveMovie(movie: SimpleMovie): void {
     this.firebaseService.saveMovie(movie);
-  } 
+  }
+
+  removeMovie(movie: SimpleMovie): void {
+    this.firebaseService.removeMovie(movie);
+  }
+
+  isSaved(imdbID: string): boolean {
+    return this.firebaseService.isSaved(imdbID);
+  }
 }

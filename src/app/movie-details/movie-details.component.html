@@ -21,7 +21,8 @@
       </mat-card-content>
   
       <mat-card-actions>
-        <button mat-raised-button color="primary">SAVE</button> <!-- TODO: change to the save movie component later -->
+        <button mat-raised-button color="warn" (click)="removeMovie(detailedMovie)" *ngIf="isSaved(detailedMovie.imdbID)">REMOVE</button>
+        <button mat-raised-button color="primary" (click)="saveMovie(detailedMovie)" *ngIf="!isSaved(detailedMovie.imdbID)">SAVE</button>
         <button mat-raised-button (click)="openTab(detailedMovie.Website)" *ngIf="detailedMovie.Website !== 'N/A'">WEBSITE</button>
         <button mat-raised-button (click)="closeDetails()">CLOSE</button>
       </mat-card-actions>

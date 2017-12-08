@@ -1,9 +1,9 @@
 <div class="movie-details">
-  <router-outlet name="movieDetails"></router-outlet>
+  <router-outlet name="savedMovieDetails"></router-outlet>
 </div>
 
 <div class="saved-movies" *ngIf="!showDetails()"> 
-  <mat-card class="saved-movie" *ngFor="let movie of movies | async">
+  <mat-card class="saved-movie" *ngFor="let movie of movies">
     <mat-card-header>
       <mat-card-title>{{movie.Title}}</mat-card-title>
       <mat-card-subtitle>{{movie.Year}}</mat-card-subtitle>
@@ -12,7 +12,7 @@
     <img mat-card-image [src]="movie.Poster" [alt]="movie.Title">
     <mat-card-actions>
       <button mat-raised-button color="primary" (click)="deleteMovie(movie)">DELETE</button>
-      <button mat-raised-button [routerLink]="[{outlets: { 'movieDetails': ['details', movie.imdbID]}}]">DETAILED VIEW</button>
+      <button mat-raised-button [routerLink]="[{outlets: { 'savedMovieDetails': ['details', movie.imdbID]}}]">DETAILED VIEW</button>
     </mat-card-actions>
   </mat-card>
 </div>

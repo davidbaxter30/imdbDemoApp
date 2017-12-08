@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -15,7 +15,7 @@ export class ImdbService {
   searchQuery: string;
 
   constructor( private http: HttpClient,
-    private router: Router ) {
+    private router: Router) {
   }
 
   searchMovies(query): Observable<ImdbResponse> {
@@ -39,9 +39,9 @@ export class ImdbService {
       });    
   }
 
-  closeDetails(): void {
+  closeDetails(currentRoute): void {
     this.detailsOpened = false;
-    this.router.navigate(['search']);
+    this.router.navigate(['../'], {relativeTo: currentRoute});
   }
 
   private getPoster(posterUrl: string): string {
