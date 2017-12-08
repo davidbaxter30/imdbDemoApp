@@ -1,0 +1,20 @@
+@import '~@angular/material/theming';
+
+:host {
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto 700px auto;
+    grid-template-rows: auto 100px auto;
+    grid-template-areas: 
+        ". . ."
+        ". notFound ."
+        ". . .";
+    background-color: #4d4d4d;
+    p {
+        grid-area: notFound;
+        color: #727272;
+        font-family: "Whitney Cond A", "Whitney Cond B", "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+        font-size: 60px;
+        font-weight: 700;
+    }
+}

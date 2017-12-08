@@ -11,7 +11,7 @@ $imdb-demo-primary: mat-palette($mat-grey, 400, 100, 600);
 $imdb-demo-accent:  mat-palette($mat-blue-grey, 400, 100, 600);
 
 // The warn palette is optional (defaults to red).
-$imdb-demo-warn:    mat-palette($mat-red, 200, 100, 300);
+$imdb-demo-warn:    mat-palette($mat-red, 300, 200, 500);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $imdb-demo-theme: mat-dark-theme($imdb-demo-primary, $imdb-demo-accent, $imdb-demo-warn);
