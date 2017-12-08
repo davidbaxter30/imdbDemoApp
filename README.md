@@ -2,6 +2,13 @@
 
 This Imdb Demo app is a showcase of some of my knowledge of Angular 4, Javascript/TS, SASS, and various frameworks and tools. 
 
+<img src="screenshots/search.png" alt="Search" width="240" height="180" border="10" />
+<img src="screenshots/searchSaveClick.png" alt="Search save click" width="240" height="180" border="10" />
+<img src="screenshots/searchNew.png" alt="Search another movie" width="240" height="180" border="10" />
+<img src="screenshots/savedList.png" alt="Saved list" width="240" height="180" border="10" />
+<img src="screenshots/savedListNew.png" alt="Saved list with 2 movies" width="240" height="180" border="10" />
+<img src="screenshots/details.png" alt="Details page" width="240" height="180" border="10" />
+
 ## What tools are used
 
 * [Angular](https://angular.io/)
