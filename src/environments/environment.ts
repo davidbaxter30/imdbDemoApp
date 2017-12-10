@@ -12,5 +12,6 @@ export const environment = {
     projectId: "imdbdemo-4c472",
     storageBucket: "imdbdemo-4c472.appspot.com",
     messagingSenderId: "423437263922"
-  }
+  },
+  OMDB_URI: "http://www.omdbapi.com/?apikey=7cd9c016{searchString}"
 };

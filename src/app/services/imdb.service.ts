@@ -1,25 +1,32 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { DetailedMovie, ImdbResponse, SimpleMovie } from '../models/imdb';
+import { environment } from '../../environments/environment';
 
-const OMDBURI: string  = 'http://www.omdbapi.com/?apikey=7cd9c016{searchString}'
 
 @Injectable()
 export class ImdbService {
 
-  public detailsOpened: boolean;
+  private _detailsOpened: boolean;
   searchQuery: string;
+
+  get detailsOpened() {
+    return this._detailsOpened;
+  }
+  set detailsOpened(value: boolean) {
+    this._detailsOpened = value;
+  }
 
   constructor( private http: HttpClient,
     private router: Router) {
   }
 
   searchMovies(query): Observable<ImdbResponse> {
-    return this.http.get<ImdbResponse>(OMDBURI.replace('{searchString}', '&s=' + encodeURI(query)))
+    return this.http.get<ImdbResponse>(environment.OMDB_URI.replace('{searchString}', '&s=' + encodeURI(query)))
       .map((response: ImdbResponse) => {
         response.Search
           .map((movie: SimpleMovie) => {
@@ -31,8 +38,8 @@ export class ImdbService {
   }
 
   getMovie(imdbID): Observable<DetailedMovie> {
-    this.detailsOpened = true;
-    return this.http.get<DetailedMovie>(OMDBURI.replace('{searchString}', '&i=' + encodeURI(imdbID)))
+    this._detailsOpened = true;
+    return this.http.get<DetailedMovie>(environment.OMDB_URI.replace('{searchString}', '&i=' + encodeURI(imdbID)))
       .map((movie: DetailedMovie) => {
         movie.Poster = this.getPoster(movie.Poster);
         return movie;
@@ -40,7 +47,7 @@ export class ImdbService {
   }
 
   closeDetails(currentRoute): void {
-    this.detailsOpened = false;
+    this._detailsOpened = false;
     this.router.navigate(['../'], {relativeTo: currentRoute});
   }
 

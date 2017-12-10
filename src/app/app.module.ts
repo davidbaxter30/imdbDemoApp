@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { NgModule } from '@angular/core';
+import { NgModule, InjectionToken } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatInputModule, MatCardModule, MatButtonModule, MatSnackBarModule } from '@angular/material';
 import { AngularFireModule } from 'angularfire2';
