@@ -1,14 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 import { ImdbSearchComponent } from './imdb-search.component';
 
 import { ImdbService } from '../services/imdb.service';
 import { FirebaseService } from '../services/firebase.service';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
 import { simpleMovieMock, imdbResponse } from '../../mocks/movieMocks';
 
 describe('ImdbSearchComponent', () => {

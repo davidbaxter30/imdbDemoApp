@@ -10,6 +10,7 @@ This Imdb Demo app is a showcase of some of my knowledge of Angular 4, Javascrip
 
 * [TypeScript](https://www.typescriptlang.org/)
 * [Angular](https://angular.io/)
+* [Node](https://nodejs.org/en/)
 * [Jasmine](https://jasmine.github.io/)
 * [Karma](https://karma-runner.github.io/1.0/index.html)
 * [Angular Cli](https://github.com/angular/angular-cli)
@@ -24,7 +25,6 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Running unit tests
 
-Open http://localhost:9876 in Chrome. 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Running end-to-end tests
