@@ -37,7 +37,7 @@ export const detailedMovieMock: DetailedMovie = {
     Response: 'ok'
 }
 
-export const imdbResponse: ImdbResponse = {
+export const imdbResponseMock: ImdbResponse = {
     Response: true,
     Search: [simpleMovieMock],
     totalResults: '1'

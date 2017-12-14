@@ -1,62 +1,99 @@
-// import { TestBed, inject, async } from '@angular/core/testing';
-// import {
-//     HttpModule,
-//     Http,
-//     Response,
-//     ResponseOptions,
-//     XHRBackend
-// } from '@angular/http';
-// import { MockBackend, MockConnection } from '@angular/http/testing';
+import { TestBed, inject, async } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
+import { MockBackend, MockConnection } from '@angular/http/testing';
 
-// import { ImdbService } from './imdb.service';
-// import { environment } from '../../environments/environment';
+import { ImdbService } from './imdb.service';
+import { environment } from '../../environments/environment';
+import { imdbResponseMock, simpleMovieMock, detailedMovieMock } from '../../mocks/movieMocks';
+import { ImdbResponse, DetailedMovie } from '../models/imdb';
 
-// describe('ImdbService', () => {
+describe('ImdbService', () => {
+  let service: ImdbService,
+    httpMock: HttpTestingController,
+    router: Router;
 
-//     beforeEach(() => {
-//         TestBed.configureTestingModule({
-//             imports: [HttpModule],
-//             providers: [
-//                 ImdbService,
-//                 { provide: XHRBackend, useClass: MockBackend }
-//             ]
-//         });
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      providers: [ImdbService]
+    });
 
-//         TestBed.get('XHRBackend')
-//     });
+    router = TestBed.get(Router); 
+    spyOn(router, 'navigate');
+    service = TestBed.get(ImdbService);
+    httpMock = TestBed.get(HttpTestingController);
+  });
 
-//     it('should be created',
-//         inject([ImdbService], (service: ImdbService) => {
-//             expect(service).toBeTruthy();
-//         })
-//     );
+  it('should be created', () => {
+    expect(service).toBeDefined();
+  });
 
-//     describe('searchMovies()', () => {
-//         it('should return an observable.',
-//             inject([ImdbService, XHRBackend], (imdbService: ImdbService, mockBackend: MockBackend) => {
-                
-//                 const mockResponse = new ResponseOptions({
-//                     body: JSON.stringify({
-//                         data: [
-//                             { id: 0, name: 'Video 0' },
-//                             { id: 1, name: 'Video 1' },
-//                             { id: 2, name: 'Video 2' },
-//                             { id: 3, name: 'Video 3' },
-//                         ]
-//                     })
-//                 });
+  describe('searchMovies()', () => {
 
-//                 mockBackend.connections.subscribe((connection: MockConnection) => {
-//                     this.lastConnection = connection;
-//                     connection.mockRespond(new Response(mockResponse));
-//                 });
+    const query = 'someQuery';
+    const compiledQuery = environment.OMDB_URI.replace('{searchString}', '&s=' + encodeURI(query));
 
-//                 imdbService.searchMovies('someTitle').subscribe( movies => {
-//                     console.log(movies);
-//                     console.log(this.lastConnection);
-//                     expect(movies).toBeDefined('movies was not defined');
-//                 })
-//             })
-//         );
-//     })
-// });
+    it('should return an ImdbResponse', () => {
+
+      service.searchMovies(query).subscribe((response: ImdbResponse) => {
+        expect(response.Search.length).toBe(1);
+        expect(response.totalResults).toBe('1');
+      });
+
+      const req = httpMock.expectOne(compiledQuery);
+      expect(req.request.method).toBe('GET');
+
+      req.flush(imdbResponseMock);
+
+      httpMock.verify();
+    });
+  });
+
+  describe('getMovie()', () => {
+    const imdbID = simpleMovieMock.imdbID;
+    const compiledURL = environment.OMDB_URI.replace('{searchString}', '&i=' + encodeURI(imdbID))
+
+    it('should set detailsOpen to true', () => {
+      service.getMovie(simpleMovieMock.imdbID).subscribe();
+
+      expect(service.detailsOpened).toBe(true);
+
+      const req = httpMock.expectOne(compiledURL);
+
+      req.flush(imdbResponseMock);
+
+      httpMock.verify();
+    });
+
+    it('should return detailed movie', () => {
+      service.getMovie(simpleMovieMock.imdbID).subscribe((movie: DetailedMovie) => {
+        expect(movie).toBe(detailedMovieMock);
+      });
+
+      const req = httpMock.expectOne(compiledURL);
+      expect(req.request.method).toBe('GET');
+
+      req.flush(detailedMovieMock);
+
+      httpMock.verify();
+    });
+  });
+
+  describe('closeDetails()', () => {
+    const routeMock = 'Fake Route';
+
+    it('should set detailsOpened to false', () => {
+      service.closeDetails(routeMock);
+
+      expect(service.detailsOpened).toBe(false);
+    });
+
+    it('should call navigate with the router passed as param', () => {
+      service.closeDetails(routeMock);
+  
+      expect(router.navigate).toHaveBeenCalledWith(['../'], {relativeTo: routeMock});
+    });
+  });
+});

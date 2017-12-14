@@ -32,7 +32,9 @@ export class ImdbSearchComponent implements OnInit, OnDestroy {
     this.savedMovies$.unsubscribe();
   }
 
-  search(movieName): void {
+  search(movieName: string): void {
+    movieName = movieName.trim();
+    
     if (this.imdbService.detailsOpened) {
       this.imdbService.closeDetails(this.route);
     }

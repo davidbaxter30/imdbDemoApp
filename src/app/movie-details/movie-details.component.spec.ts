@@ -9,7 +9,7 @@ import { MovieDetailsComponent } from './movie-details.component';
 
 import { ImdbService } from '../services/imdb.service';
 import { FirebaseService } from '../services/firebase.service';
-import { detailedMovieMock, imdbResponse, simpleMovieMock } from '../../mocks/movieMocks';
+import { detailedMovieMock, imdbResponseMock, simpleMovieMock } from '../../mocks/movieMocks';
 import { detachEmbeddedView } from '@angular/core/src/view/view_attach';
 
 describe('MovieDetailsComponent', () => {

@@ -9,7 +9,7 @@ import { ImdbSearchComponent } from './imdb-search.component';
 
 import { ImdbService } from '../services/imdb.service';
 import { FirebaseService } from '../services/firebase.service';
-import { simpleMovieMock, imdbResponse } from '../../mocks/movieMocks';
+import { simpleMovieMock, imdbResponseMock } from '../../mocks/movieMocks';
 
 describe('ImdbSearchComponent', () => {
   let component: ImdbSearchComponent,
@@ -23,7 +23,7 @@ describe('ImdbSearchComponent', () => {
     firebaseService.getSavedMovies.and.returnValue(Observable.of({}));
 
     imdbService = jasmine.createSpyObj<ImdbService>('ImdbService', ['searchMovies', 'closeDetails', 'detailsOpened']);
-    imdbService.searchMovies.and.returnValue(Observable.of(imdbResponse));
+    imdbService.searchMovies.and.returnValue(Observable.of(imdbResponseMock));
 
     activatedRoute = jasmine.createSpyObj<ActivatedRoute>('ActivatedRoute', ['getParams']);
 
@@ -64,7 +64,7 @@ describe('ImdbSearchComponent', () => {
     it('should assign search results to the movies property', () => {
       component.search(testString);
 
-      expect(component.movies).toBe(imdbResponse.Search);
+      expect(component.movies).toBe(imdbResponseMock.Search);
     })
   });
 
