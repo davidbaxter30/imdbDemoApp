@@ -25,43 +25,42 @@ export class ImdbSearchComponent implements OnInit, OnDestroy {
         this.movies = response.Search;
       });
     this.savedMovies$ = this.firebaseService.getSavedMovies().subscribe();
-  }
+  };
 
   ngOnDestroy() {
     this.simpleMovies$.unsubscribe();
     this.savedMovies$.unsubscribe();
-  }
+  };
 
   search(movieName: string): void {
-    movieName = movieName.trim();
-    
     if (this.imdbService.detailsOpened) {
       this.imdbService.closeDetails(this.route);
     }
     this.simpleMovies$.unsubscribe();
 
-    this.simpleMovies$ = this.imdbService.searchMovies(movieName).subscribe((response: ImdbResponse) => {
+    this.simpleMovies$ = this.imdbService.searchMovies(movieName.trim())
+    .subscribe((response: ImdbResponse) => {
       this.movies = response.Search;
     });
-  }
+  };
 
   showDetails(): boolean {
     return this.imdbService.detailsOpened;
-  }
+  };
 
   openTab(url): void {
     window.open(url, '_blank');
-  }
+  };
 
   saveMovie(movie: SimpleMovie): void {
     this.firebaseService.saveMovie(movie);
-  }
+  };
 
   removeMovie(movie: SimpleMovie): void {
     this.firebaseService.removeMovie(movie);
-  }
+  };
 
   isSaved(imdbID: string): boolean {
     return this.firebaseService.isSaved(imdbID);
-  }
-}
+  };
+};
